@@ -1,0 +1,8 @@
+/PeekpaHubWebsite/config/config.json
+
+.idea/
+
+*.pyc
+*.pyo
+
+.DS_Store
