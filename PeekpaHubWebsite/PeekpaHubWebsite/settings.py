@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from mongoengine import connect
+from config.helper import read_config_from_configfile
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+CONFIG_JSON = read_config_from_configfile()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.Gua.apps.GuaConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -119,3 +122,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#  rest framework系统自带的分页
+# REST_FRAMEWORK = {
+#     # 分页
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',  # LimitOffsetPagination 分页风格
+#     'PAGE_SIZE': 30,  # 每页多少条记录
+# }
+
+MONGODB_DATABASES = {
+    "aliyun": {
+        "name": CONFIG_JSON.get("mongo_databses").get("aliyun")[0].get("gua").get("database_name"),
+        "host": CONFIG_JSON.get("mongo_databses").get("aliyun")[0].get("gua").get("host"),
+        "tz_aware": True,
+    },
+}
+
+connect(CONFIG_JSON.get("mongo_databses").get("aliyun")[0].get("gua").get("database_name"),
+        host=CONFIG_JSON.get("mongo_databses").get("aliyun")[0].get("gua").get("host"),
+        port=CONFIG_JSON.get("mongo_databses").get("aliyun")[0].get("gua").get("port"))

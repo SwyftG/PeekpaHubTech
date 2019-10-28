@@ -1,0 +1,21 @@
+{
+    "code": "msg",
+	"mongo_databses": {
+		"aliyun": [{
+			"gua": {
+				"database_name": "名称",
+				"host": "ip地址",
+				"port": "端口号",
+				"collection_name": ["collection name list"]
+			}
+		}]
+	},
+    "urls":{
+      "gua":[
+        "url0",
+        "url1",
+        "url2",
+        "url3"
+      ]
+    }
+}
