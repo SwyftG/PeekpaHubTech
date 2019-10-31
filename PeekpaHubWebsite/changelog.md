@@ -5,4 +5,5 @@
   - [x] post Gua info interface
   - [x] post Gua situation interface
   
-  
+20191031:
+- [x] separete setting.py
