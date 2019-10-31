@@ -4,7 +4,7 @@ __date__ = '2019/10/28 12:47 AM'
 
 from django.urls import path
 from .views import GuaView, GuaListView, GuaRView
-from PeekpaHubWebsite.settings import CONFIG_JSON
+from PeekpaHubWebsite.settings.base import CONFIG_JSON
 
 urlpatterns = [
         path(CONFIG_JSON.get("urls").get("gua")[1], GuaRView.as_view()),

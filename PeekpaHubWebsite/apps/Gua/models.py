@@ -1,6 +1,6 @@
 from mongoengine.fields import *
 from mongoengine.document import Document
-from PeekpaHubWebsite.settings import CONFIG_JSON
+from PeekpaHubWebsite.settings.base import CONFIG_JSON
 
 # Create your models here.
 

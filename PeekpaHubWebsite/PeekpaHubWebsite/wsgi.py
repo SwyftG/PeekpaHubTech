@@ -10,7 +10,8 @@ https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'PeekpaHubWebsite.settings')
+profile = os.environ.get('PROJECT_PROFILE', 'develop')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'PeekpaHubWebsite.settings.%s' % profile)
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'PeekpaHubWebsite.settings')
 
 application = get_wsgi_application()

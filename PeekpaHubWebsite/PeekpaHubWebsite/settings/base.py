@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from mongoengine import connect
 from config.helper import read_config_from_configfile
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -24,8 +23,6 @@ CONFIG_JSON = read_config_from_configfile()
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '0-g$w=ev*f)6hrwg0^cnnnn-7m_z@p%b!z8e54heyl5)#w91*%'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -130,14 +127,3 @@ STATIC_URL = '/static/'
 #     'PAGE_SIZE': 30,  # 每页多少条记录
 # }
 
-MONGODB_DATABASES = {
-    "aliyun": {
-        "name": CONFIG_JSON.get("mongo_databses").get("aliyun")[0].get("gua").get("database_name"),
-        "host": CONFIG_JSON.get("mongo_databses").get("aliyun")[0].get("gua").get("host"),
-        "tz_aware": True,
-    },
-}
-
-connect(CONFIG_JSON.get("mongo_databses").get("aliyun")[0].get("gua").get("database_name"),
-        host=CONFIG_JSON.get("mongo_databses").get("aliyun")[0].get("gua").get("host"),
-        port=CONFIG_JSON.get("mongo_databses").get("aliyun")[0].get("gua").get("port"))

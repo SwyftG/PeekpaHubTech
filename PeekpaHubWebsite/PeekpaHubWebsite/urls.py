@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from PeekpaHubWebsite.settings import CONFIG_JSON
+from PeekpaHubWebsite.settings.base import CONFIG_JSON
 
 urlpatterns = [
     path('admin/', admin.site.urls),
