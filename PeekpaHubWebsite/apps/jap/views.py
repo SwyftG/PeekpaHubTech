@@ -12,23 +12,27 @@ class JapView(APIView):
     :parameter jp_only: search key work, japanese
     """
     def get(self, request):
-        search_key_chinese = request.GET.get('chinese')
-        search_key_jap_chinese = request.GET.get('jp_ch')
-        search_key_jap_only = request.GET.get('jp_only')
         response = {'code': 200}
+        search_type, search_key = self.process_paramter(request)
+        print('search_type: ', search_type)
         result = None
-        if search_key_chinese is not None:
-            result = JapLanguage.objects.filter(chinese__contains=search_key_chinese).all().order_by('levelNum').order_by('classNum')
-            response['search_word'] = search_key_chinese
-        elif search_key_jap_chinese is not None:
-            result = JapLanguage.objects.filter(jp_chinese__contains=search_key_jap_chinese).all().order_by('levelNum').order_by('classNum')
-            response['search_word'] = search_key_jap_chinese
-        elif search_key_jap_only is not None:
-            result = JapLanguage.objects.filter(jp_only__contains=search_key_jap_only).all().order_by('levelNum').order_by('classNum')
-            response['search_word'] = search_key_jap_only
-        if result is None:
-            response['size'] = 0
-        else:
-            response['size'] = len(result)
+        if search_type == 1:
+            result = JapLanguage.objects.filter(chinese__contains=search_key).all().order_by('levelNum').order_by('classNum')
+        elif search_type == 2:
+            result = JapLanguage.objects.filter(jp_chinese__contains=search_key).all().order_by('levelNum').order_by('classNum')
+        elif search_type == 3:
+            result = JapLanguage.objects.filter(jp_only__contains=search_key).all().order_by('levelNum').order_by('classNum')
+        response['search_word'] = search_key
+        response['size'] = 0 if result is None else len(result)
         response['data'] = JapSerializer(result, many=True).data
         return Response(data=response, status=200)
+
+    def process_paramter(self, request):
+        if request.GET.get('chinese') is not None:
+            return 1, request.GET.get('chinese')
+        elif request.GET.get('jp_ch') is not None:
+            return 2, request.GET.get('jp_ch')
+        elif request.GET.get('jp_only') is not None:
+            return 3, request.GET.get('jp_only')
+        else:
+            return 0, None

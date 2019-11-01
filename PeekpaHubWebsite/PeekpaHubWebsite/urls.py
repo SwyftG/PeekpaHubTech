@@ -25,5 +25,5 @@ urlpatterns = [
     path(CONFIG_JSON.get("urls").get("jpearth")[0], include('apps.jpearth.urls')),
     path(CONFIG_JSON.get("urls").get("gua")[0], include('apps.gua.urls')),
     path(CONFIG_JSON.get("urls").get("jap")[0], include('apps.jap.urls')),
-
+    path(CONFIG_JSON.get("urls").get("caoliu")[0], include('apps.caoliu.urls')),
 ]

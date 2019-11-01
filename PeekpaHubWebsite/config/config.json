@@ -7,7 +7,15 @@
 				"host": "4.4.4.4",
 				"port": 27001
 			},
-			"collection_name": ["collection1", "collection2", "collection3", "collection4"]
+			"collection_name": ["collection1", "collection2", "collection3", "collection4"],
+			"collection_name_caoliu": {
+				"fid2":"fid2",
+				"fid4":"fid4",
+				"fid7":"fid7",
+				"fid15":"fid15",
+				"fid25":"fid25",
+				"fid26":"fid26"
+			}
 		}
 	},
 	"urls": {
@@ -25,17 +33,10 @@
 		"jap": [
 			"v1/api/jap/",
 			""
+		],
+		"caoliu": [
+			"v1/api/caoliu/",
+			""
 		]
-	},
-	"urls_comment": [{
-			"gua": [
-				"GET/POST--/v1/api/gua/report", "### 数据上报，有get和post，可以传参数 page 和 page_size",
-				"GET--/v1/api/gua/111111", "### 获取详细信息",
-				"GET--/v1/api/gua/", "### 获取全部列表"
-			]
-		},
-		{
-			"jpn": []
-		}
-	]
+	}
 }
