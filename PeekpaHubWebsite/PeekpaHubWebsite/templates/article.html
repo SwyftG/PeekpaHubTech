@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% block extra_head %}
+    <link rel="stylesheet" href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script>hljs.initHighlightingOnLoad();</script>
+    {% endblock %}
+</head>
+<body>
+
+<ul>
+    {% for post in article_list %}
+    <li>
+        <a>{{ post.title }}</a>
+        <div>
+            <span>作者:{{ post.author }}</span>
+
+        </div>
+        {% autoescape off%}
+        {{ post.context_html }}
+        {% endautoescape %}
+    </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

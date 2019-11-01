@@ -1,21 +1,41 @@
 {
-    "code": "msg",
+	"code": "msg",
 	"mongo_databses": {
-		"aliyun": [{
-			"gua": {
-				"database_name": "名称",
-				"host": "ip地址",
-				"port": "端口号",
-				"collection_name": ["collection name list"]
-			}
-		}]
+		"aliyun": {
+			"config": {
+				"database_name": "name",
+				"host": "4.4.4.4",
+				"port": 27001
+			},
+			"collection_name": ["collection1", "collection2", "collection3", "collection4"]
+		}
 	},
-    "urls":{
-      "gua":[
-        "url0",
-        "url1",
-        "url2",
-        "url3"
-      ]
-    }
+	"urls": {
+		"gua": [
+			"v1/api/gua/",
+			"",
+			"<str:check_num>",
+			""
+		],
+		"jpearth": [
+			"v1/api/jpearth/",
+			"",
+			""
+		],
+		"jap": [
+			"v1/api/jap/",
+			""
+		]
+	},
+	"urls_comment": [{
+			"gua": [
+				"GET/POST--/v1/api/gua/report", "### 数据上报，有get和post，可以传参数 page 和 page_size",
+				"GET--/v1/api/gua/111111", "### 获取详细信息",
+				"GET--/v1/api/gua/", "### 获取全部列表"
+			]
+		},
+		{
+			"jpn": []
+		}
+	]
 }

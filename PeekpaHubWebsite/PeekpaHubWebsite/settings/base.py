@@ -16,6 +16,7 @@ from config.helper import read_config_from_configfile
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_JSON = read_config_from_configfile()
+print("PATH: {}".format(os.path.join(BASE_DIR, 'templates')))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -36,11 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.Gua.apps.GuaConfig',
-    'rest_framework'
+    'apps.gua.apps.GuaConfig',
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,11 +78,11 @@ WSGI_APPLICATION = 'PeekpaHubWebsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': None,
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': None,
+#     }
+# }
 
 
 # Password validation
@@ -127,3 +130,4 @@ STATIC_URL = '/static/'
 #     'PAGE_SIZE': 30,  # 每页多少条记录
 # }
 
+CORS_ORIGIN_ALLOW_ALL = True
