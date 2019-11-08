@@ -18,11 +18,12 @@
     <li>
         <a>{{ post.title }}</a>
         <div>
-            <span>作者:{{ post.author }}</span>
+            <span>作者:{{ post.owner }}</span>
+            <span>摘要:{{ post.des }}</span>
 
         </div>
         {% autoescape off%}
-        {{ post.context_html }}
+        {{ post.content_html }}
         {% endautoescape %}
     </li>
     {% endfor %}

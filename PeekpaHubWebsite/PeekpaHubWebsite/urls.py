@@ -16,12 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from PeekpaHubWebsite.settings.base import CONFIG_JSON
-from apps.article.views import ArticleView, ArticleListView
+from apps.article.views import ArticleDetailView, ArticleListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('article/', ArticleView.as_view()),
-    path('aa/', ArticleListView.as_view()),
+    path('article/', include('apps.article.urls')),
+    path('common/', include('apps.common.urls')),
+    path('test/', include('apps.webrouter.urls')),
+
     path(CONFIG_JSON.get("urls").get("jpearth")[0], include('apps.jpearth.urls')),
     path(CONFIG_JSON.get("urls").get("gua")[0], include('apps.gua.urls')),
     path(CONFIG_JSON.get("urls").get("jap")[0], include('apps.jap.urls')),

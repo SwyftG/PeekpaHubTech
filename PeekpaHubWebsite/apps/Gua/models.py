@@ -17,6 +17,9 @@ class Gua(Document):
     gua_four = StringField()
     gua_five = StringField()
 
+    def __str__(self):
+        return self.gua_title
+
 
 class GuaRModel(Document):
     meta = {'collection': CONFIG_JSON.get("mongo_databses").get("aliyun").get("collection_name")[1]}
@@ -33,3 +36,4 @@ class GuaRModel(Document):
     _class = StringField()
     dayTime = StringField()
     guaName = StringField()
+

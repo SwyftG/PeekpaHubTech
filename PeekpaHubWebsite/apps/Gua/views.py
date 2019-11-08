@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from .models import Gua, GuaRModel
 from .serializers import GuaSerializer, GuaReportSerializer
 from rest_framework.pagination import PageNumberPagination
-
+from PeekpaHubWebsite.settings.base import CONFIG_JSON
 
 # Create your views here.
 class GuaView(APIView):
@@ -89,3 +89,24 @@ class GuaRView(APIView):
         serializer = GuaReportSerializer(gua_r)
         response['data'] = serializer.data
         return Response(data=response)
+
+
+class GuaConfigView(APIView):
+    local_config = CONFIG_JSON.get("gua_config")
+    def get(self, request):
+        response = {'success':True}
+        response['message'] = 'success'
+        response['data'] = self.local_config
+        return Response(data=response)
+
+    def post(self, request):
+        self.local_config['show_auther'] = request.data.get('show_auther', self.local_config['show_auther'])
+        self.local_config['version_time'] = request.data.get('version_time', self.local_config['version_time'])
+        self.local_config['open_report'] = request.data.get('open_report', self.local_config['open_report'])
+        self.local_config['system_message'] = request.data.get('system_message', self.local_config['system_message'])
+        self.local_config['is_force'] = request.data.get('is_force', self.local_config['is_force'])
+        self.local_config['open_share'] = request.data.get('open_share', self.local_config['open_share'])
+        self.local_config['test'] = request.data.get('test', self.local_config['test'])
+        self.local_config['open_login'] = request.data.get('open_login', self.local_config['open_login'])
+        self.local_config['max_time'] = request.data.get('max_time', self.local_config['max_time'])
+        return Response(data=self.local_config)

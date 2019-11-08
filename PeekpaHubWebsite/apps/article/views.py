@@ -1,48 +1,66 @@
-from django.shortcuts import render
-
-# Create your views here.
-
-from .models import Article
-from django.views.generic import ListView
-from .models import Article
-import mistune
 from rest_framework.views import APIView
-from .serializers import ArticleSerializer
 from rest_framework.response import Response
+from .models import Post, Category
+from .serializers import PostDetailSerializer, PostListSerializer, CategorySerializer, TagSerializer
 
-class ArticleView(ListView):
-    def get(self, request):
-#         article = Article()
-#         article.title = '零基础教你玩转Django之03篇 —— 完善Gua的API，分页和POST请求'
-#         article.author = '皮克啪的铲屎官'
-#         article.content = """### RESTful规范设计
-#
-# 我们在上一篇文章讨论了RESTful API的设计规范，但是在前一篇文章，我们的接口只是很简单的：
-#
-# ```
-# http://127.0.0.1:8000/gua?checkNum=111111
-# ```
-#
-# 这个不符合我们的规范啊，我们的规范，至少应该是长这个样子的：
-#
-# ```
-# http://127.0.0.1:8000/v1/api/gua?checkNum=111111
-# ```
-#
-# 那么，我们今天就来实现这样的接口。
-#
-# 首先，还是需要来修改我们的`urls.py` 文件，将之前的:"""
-#         article.context_html = mistune.markdown(article.content)
-#         article.image = 'https://wx2.sinaimg.cn/mw690/a726c4d3ly1g17fkc592hj213w0u0qcx.jpg'
-#         article.save()
-        article = Article.objects.all()
-        return render(request, 'article.html', context={'article_list':article})
+
+
+class ArticleDetailView(APIView):
+    def get(self, request, article_id):
+        print("article_id: ",article_id, "/", type(article_id))
+        result = Post.objects.filter(time_id=article_id).first()
+        response = PostDetailSerializer(result)
+        return Response(data=response.data, status=200)
+        # return render(request, 'article.html', context={'article_list': response.data})
+
 
 class ArticleListView(APIView):
     def get(self, request):
         response = {'code': 200}
-        result = Article.objects.all()
+        result = Post.objects.all()
         response['msg'] = 'success'
-        serializer = ArticleSerializer(result, many=True)
+        serializer = PostListSerializer(result, many=True)
+        response['data'] = serializer.data
+        return Response(data=response, status=200)
+
+
+class CategoryListView(APIView):
+    def get(self, request):
+        response = {'code': 200}
+        result = Category.objects.all()
+        response['msg'] = 'success'
+        serializer = CategorySerializer(result, many=True)
+        response['data'] = serializer.data
+        return Response(data=response, status=200)
+
+
+class CategoryArticleListView(APIView):
+    def get(self, request, category_id):
+        response = {'code': 200}
+        result, tag = Post.get_by_category(category_id)
+        response['msg'] = 'success'
+        response['category'] = CategorySerializer(tag).data
+        serializer = PostListSerializer(result, many=True)
+        response['data'] = serializer.data
+        return Response(data=response, status=200)
+
+
+class TagListView(APIView):
+    def get(self, request):
+        response = {'code': 200}
+        result = Category.objects.all()
+        response['msg'] = 'success'
+        serializer = TagSerializer(result, many=True)
+        response['data'] = serializer.data
+        return Response(data=response, status=200)
+
+
+class TagArticleListView(APIView):
+    def get(self, request, tag_id):
+        response = {'code': 200}
+        result, tag = Post.get_by_tag(tag_id)
+        response['msg'] = 'success'
+        response['tag'] = TagSerializer(tag).data
+        serializer = PostListSerializer(result, many=True)
         response['data'] = serializer.data
         return Response(data=response, status=200)

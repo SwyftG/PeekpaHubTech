@@ -3,40 +3,57 @@
 	"mongo_databses": {
 		"aliyun": {
 			"config": {
-				"database_name": "name",
-				"host": "4.4.4.4",
-				"port": 27001
+				"database_name": "Daily",
+				"host": "1.1.1.1",
+				"port": 2700
 			},
 			"collection_name": ["collection1", "collection2", "collection3", "collection4"],
 			"collection_name_caoliu": {
-				"fid2":"fid2",
-				"fid4":"fid4",
-				"fid7":"fid7",
-				"fid15":"fid15",
-				"fid25":"fid25",
-				"fid26":"fid26"
+				"fid2": "fid2",
+				"fid4": "fid4",
+				"fid7": "fid7",
+				"fid15": "fid15",
+				"fid25": "fid25",
+				"fid26": "fid26"
 			}
 		}
 	},
 	"urls": {
 		"gua": [
-			"v1/api/gua/",
 			"",
-			"<str:check_num>",
+			"",
+			"",
 			""
 		],
 		"jpearth": [
-			"v1/api/jpearth/",
+			"",
 			"",
 			""
 		],
 		"jap": [
-			"v1/api/jap/",
+			"",
 			""
 		],
 		"caoliu": [
-			"v1/api/caoliu/",
+			"",
+			""
+		],
+		"common": [
 			""
 		]
-	}
+	},
+	"gua_config": {
+	},
+	"email_setting": {
+		"daily_check" : {
+			"EMAIL_HOST":"smtp.126.com",
+			"EMAIL_PORT":465,
+			"EMAIL_HOST_USER":"",
+			"EMAIL_FROM_EMAIL":"",
+			"EMAIL_HOST_PASSWORD":"",
+			"EMAIL_IP_ADDRESS":"",
+			"EMAIL_RECIPIENT_LIST":[]
+		}
+	},
+	"local_file_path":""
 }

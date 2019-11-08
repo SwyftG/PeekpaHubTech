@@ -5,7 +5,10 @@ from rest_framework.views import APIView
 from .models import CaoliuFid2, CaoliuFid4, CaoliuFid7, CaoliuFid15, CaoliuFid25, CaoliuFid26
 from .serializers import CaoliuSerializer
 from mongoengine.queryset.visitor import Q
+from rest_framework.authentication import BaseAuthentication
+from rest_framework import permissions
 
+from .services import send_daily_check_mail
 
 class CaoliuView(APIView):
     FID_2 = 2
@@ -16,6 +19,9 @@ class CaoliuView(APIView):
     FID_26 = 26
     TYPE_DAILY = 1
     TYPE_SEARCH = 2
+
+    # authentication_classes = (BaseAuthentication)
+    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
         response = {'code': 200}

@@ -38,7 +38,6 @@ class JpEarthListView(APIView):
         response = {'code': 200}
         limit_num = request.GET.get('limit', 100)
         result = JpEarthQuake.objects.all().order_by('-jp_id')
-        print('/limit:', limit_num)
         if limit_num == 'null':
             jp_searilizer = JpEarthSerializer(result, many=True)
             response['size'] = result.count()
